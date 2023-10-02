@@ -78,5 +78,27 @@ app.post('/messages/save', async (req, res) => {
   }
 })
 
+// a route to handle fetching about me information
+app.get('/aboutme', async (req, res) => {
+  console.log('received request for /aboutme')
+  try {
+      const aboutData = {
+          paragraphs: [
+              "Hello, my name is Anna Lovellette.",
+              "I am currently a Senior at NYU CAS.",
+              "I am studying Computer Science & Data Science.",
+              "I am graduating in December!  Woohoo!"
+          ]
+      };
+      res.json(aboutData);
+  } catch (err) {
+      console.error('Error handling for /aboutme', err);
+      res.status(400).json({
+          error: err,
+          status: 'failed to retrieve about me information',
+      })
+  }
+})
+
 // export the express app we created to make it available to other modules
 module.exports = app // CommonJS export style!
